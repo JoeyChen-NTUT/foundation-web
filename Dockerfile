@@ -1,5 +1,6 @@
 FROM php:7.3-apache
 
+RUN export DEBIAN_FRONTEND=noninteractive
 RUN apt clean
 RUN apt update
 RUN apt install -y apt-utils
@@ -15,7 +16,7 @@ RUN sed -i -e 's/max_execution_time = 30/max_execution_time = 300/g' /usr/local/
     sed -i -e 's/max_input_time = 60/max_input_time = 120/g' /usr/local/etc/php/php.ini
    
 #install mysqli extensions
-RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+RUN docker-php-ext-install pdo pdo_mysql && docker-php-ext-enable pdo pdo_mysql
 
 #enable mods
 RUN a2enmod rewrite
