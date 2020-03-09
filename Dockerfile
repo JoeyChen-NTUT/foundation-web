@@ -3,7 +3,7 @@ FROM php:7.3-apache
 RUN export DEBIAN_FRONTEND=noninteractive
 RUN apt clean
 RUN apt update
-RUN apt install -y apt-utils
+RUN apt install -y apt-utils libxrender1
 
 #modify php.ini for env require
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
