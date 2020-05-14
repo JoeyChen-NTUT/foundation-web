@@ -1,9 +1,13 @@
 FROM php:7.3-apache
 
+RUN curl -o /usr/share/ca-certificates/NTUT_CA.pem --insecure https://raw.githubusercontent.com/JoeyChen-NTUT/document-control-web/master/NTUT_Computer_And_Network_Center_Root_CA.crt
+RUN update-ca-certificates --fresh
+
 RUN export DEBIAN_FRONTEND=noninteractive
 RUN apt clean
 RUN apt update
-RUN apt install -y apt-utils libxrender1 libfontconfig1 libxext6
+RUN apt install -y apt-utils libxrender1 libfontconfig1 libxext6 git libzip-dev
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 #modify php.ini for env require
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
@@ -16,7 +20,7 @@ RUN sed -i -e 's/max_execution_time = 30/max_execution_time = 300/g' /usr/local/
     sed -i -e 's/max_input_time = 60/max_input_time = 120/g' /usr/local/etc/php/php.ini
    
 #install mysqli extensions
-RUN docker-php-ext-install pdo pdo_mysql && docker-php-ext-enable pdo pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql zip && docker-php-ext-enable pdo pdo_mysql zip
 
 #enable mods
 RUN a2enmod rewrite
