@@ -6,8 +6,10 @@ RUN update-ca-certificates --fresh
 RUN export DEBIAN_FRONTEND=noninteractive
 RUN apt clean
 RUN apt update
-RUN apt install -y apt-utils libxrender1 libfontconfig1 libxext6 git libzip-dev
+RUN apt install -y apt-utils libxrender1 libfontconfig1 libxext6 git libzip-dev 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN apt install fonts-wqy-microhei ttf-wqy-microhei fonts-wqy-zenhei ttf-wqy-zenhei
+RUN fc-cache -f -v
 
 #modify php.ini for env require
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
