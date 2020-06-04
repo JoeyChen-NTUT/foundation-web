@@ -1,6 +1,6 @@
 FROM php:7.3-apache
 
-RUN curl -o /usr/share/ca-certificates/NTUT_CA.pem --insecure https://raw.githubusercontent.com/JoeyChen-NTUT/foundation-web/master/NTUT_Computer_And_Network_Center_Root_CA.crt
+RUN curl -o /usr/share/ca-certificates/NTUT_CA.pem https://cnc.ntut.edu.tw/var/file/4/1004/img/1183/NTUT_Computer_And_Network_Center_Root_CA.cer
 RUN update-ca-certificates --fresh
 
 RUN export DEBIAN_FRONTEND=noninteractive
