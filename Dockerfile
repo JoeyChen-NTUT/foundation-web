@@ -22,7 +22,9 @@ RUN sed -i -e 's/max_execution_time = 30/max_execution_time = 300/g' /usr/local/
     sed -i -e 's/;date.timezone =/date.timezone = Asia\/Taipei/g' /usr/local/etc/php/php.ini && \
     sed -i -e 's/max_file_uploads = 20/max_file_uploads = 300/g' /usr/local/etc/php/php.ini && \
     sed -i -e 's/max_input_time = 60/max_input_time = 120/g' /usr/local/etc/php/php.ini
-   
+    sed -i -e 's/;curl.cainfo=/curl.cainfo=\/etc/ssl\/certs\/ca-certificates.crt/g' /usr/local/etc/php/php.ini && \
+    sed -i -e 's/;openssl.cainfo=/openssl.cainfo=\/etc/ssl\/certs\/ca-certificates.crt/g' /usr/local/etc/php/php.ini && \
+    
 #install mysqli extensions
 RUN docker-php-ext-install pdo pdo_mysql zip gd && docker-php-ext-enable pdo pdo_mysql zip gd
 
