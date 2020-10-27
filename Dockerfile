@@ -7,7 +7,7 @@ RUN update-ca-certificates --fresh
 
 RUN apt clean
 RUN apt update
-RUN apt install -y apt-utils libxrender1 libfontconfig1 libxext6 git libzip-dev 
+RUN apt install -y apt-utils libxrender1 libfontconfig1 libxext6 git libzip-dev libpng-dev
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 #RUN apt install fonts-wqy-microhei ttf-wqy-microhei fonts-wqy-zenhei ttf-wqy-zenhei
 RUN apt install fontconfig fonts-arphic-ukai
@@ -24,7 +24,7 @@ RUN sed -i -e 's/max_execution_time = 30/max_execution_time = 300/g' /usr/local/
     sed -i -e 's/max_input_time = 60/max_input_time = 120/g' /usr/local/etc/php/php.ini
    
 #install mysqli extensions
-RUN docker-php-ext-install pdo pdo_mysql zip && docker-php-ext-enable pdo pdo_mysql zip
+RUN docker-php-ext-install pdo pdo_mysql zip gd && docker-php-ext-enable pdo pdo_mysql zip gd
 
 #enable mods
 RUN a2enmod rewrite
